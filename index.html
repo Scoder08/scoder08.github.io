@@ -270,51 +270,8 @@
 					   <section id="Contribution">
 						<div class="row section-intro">
 						<div class="col-twelve">
-					<h5>SPEECH TO SPEECH</h5>
-					<input id = "bStart" type = "button" value = "Start" class="button stroke smoothscroll" style="color:white" onclick = "start();"></input>
-					<div id = "output"></div>
-
-				<a href="#" class="say button button-primary"  data-modal="modal">Say It</a>
-				</div>
-
-				</div>
-				<audio src="" class="speech" hidden></audio>
-
-				<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-				<script>
-				//scan
-					var recognition = new webkitSpeechRecognition();
-					recognition.continuous = true;
-					//recognition.interimResults = true;
-					function start(){
-						recognition.onresult = function(event) { 
-							console.log(event);
-							var output = document.getElementById("output");
-							output.innerHTML = "";
-							for(var i=0; i<event.results.length; i++){
-								output.innerHTML = output.innerHTML + event.results[i][0].transcript;
-							}
-						}
-						recognition.start();
-					}
-				//speak
-				$(function() {
-				$('a.say').on('click',function(e){
-				e.preventDefault();
-				var text= $('input[name="Text"]').val();
-				text = encodeURIComponent(text);
-				console.log(text);
-				var url = "http://translate.google.com/translate_tts?tl=en&q=" + output.innerHTML + "&client=tw-ob";
-				$('audio').attr('src', url).get(0).play();
-				});
-				});
-				</script>
-					
-				</div>
-			</div>
-			</div> 
-		</section>
+							<h3>CONTRIBUTION</h3>
+							<h5 style="color:white" href="https://t.me/eyescodebot">Eyeverse Telegram Bot</h5>
 
 
 
