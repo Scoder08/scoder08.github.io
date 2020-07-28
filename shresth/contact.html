@@ -97,21 +97,21 @@
           </div>
           <div class="row block-9">
             <div class="col-md-6 pr-md-5">
-              <form action="#">
+              <form>
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Your Name">
+                  <input type="text" class="form-control" placeholder="Your Name" id="name" required>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Your Email">
+                  <input type="text" class="form-control" id="email" placeholder="Your Email" required>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Subject">
+                  <input type="text" class="form-control" id="subject" placeholder="Subject" required>
                 </div>
                 <div class="form-group">
-                  <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                  <textarea cols="30" rows="7" class="form-control" placeholder="Message" id="body" required></textarea>
                 </div>
                 <div class="form-group">
-                  <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                  <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5" onclick="sendEmail()">
                 </div>
               </form>
             
@@ -152,7 +152,23 @@
       </div>
 
     </div>
-
+    <script>
+      function sendEmail() {
+        Email.send({
+            Host : "smtp.mailtrap.io",
+            Username : "8e97a83edcc6fd",
+            Password : "49ed8fba69e6af",
+            To : 'shresthsaxena5@gmail.com',
+            From : document.getElementById('email').value,
+          Subject : document.getElementById('subject').value,
+          Body : document.getElementById('body').value,
+        }).then(
+          message => alert('sent')
+        );
+        }
+    </script>
+    <script src="https://smtpjs.com/v3/smtp.js">
+    </script>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
