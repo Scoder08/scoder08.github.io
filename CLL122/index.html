@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLL 122 Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <style>
+        html, body {
+            color: rgb(44, 44, 44);
+            font-size: 100%;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+        }
+        table input {
+            width: 60%;
+        }
+    </style>
+</head>
+
+<body>
+    <noscript>
+        <div style="border: 3px solid rgb(0, 0, 0); margin: 10%;padding: 5px;text-align: center;">
+            <span style="color:red;font-weight: bold;">
+                If you are reading this message, JavaScript is not enabled in your browser!<br>
+                You need to enable JavaScript on your browser to view this site.
+            </span>
+        </div>
+    </noscript>
+
+    <div style="margin-left: 4%;margin-right: 4%;text-align: center;align-items: center;">
+
+        <div style="text-align: center;margin: 3%;">
+            <h5 style="color: brown;">CLL122 Project</h5>
+            <h2>Chemical Reaction Engineering Calculator</h2>
+        </div>
+
+        <!--TABS-->
+
+        <nav style="text-align: left;margin: 3%;">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+                <button class="nav-link active" id="nav-example-tab" data-bs-toggle="tab" data-bs-target="#nav-example"
+                    type="button" role="tab" aria-controls="nav-example" aria-selected="true">Home</button>
+
+                <button class="nav-link" id="nav-equilibriumdata-tab" data-bs-toggle="tab"
+                    data-bs-target="#nav-equilibriumdata" type="button" role="tab" aria-controls="nav-equilibriumdata"
+                    aria-selected="false">CSTR Volume</button>
+
+                <button class="nav-link" id="nav-mccabethiele-tab" data-bs-toggle="tab"
+                    data-bs-target="#nav-mccabethiele" type="button" role="tab" aria-controls="nav-mccabethiele"
+                    aria-selected="false">Rate of Reaction</button>
+
+                <button class="nav-link" id="nav-ponchonsavarit-tab" data-bs-toggle="tab"
+                    data-bs-target="#nav-ponchonsavarit" type="button" role="tab" aria-controls="nav-ponchonsavarit"
+                    aria-selected="false">Space Time</button>
+
+                <button class="nav-link" id="nav-columnprofiles-tab" data-bs-toggle="tab"
+                    data-bs-target="#nav-columnprofiles" type="button" role="tab" aria-controls="nav-columnprofiles"
+                    aria-selected="false">Selectivity</button>
+
+                <button class="nav-link" id="nav-precision-tab" data-bs-toggle="tab" data-bs-target="#nav-precision"
+                    type="button" role="tab" aria-controls="nav-precision" aria-selected="false">Conversion</button>
+
+            </div>
+        </nav>
+
+        <!--TAB CONTENT-->
+
+        <div class="tab-content" id="nav-tabContent">
+
+            <!--Home-->
+
+            <div class="tab-pane fade show active" id="nav-example" role="tabpanel" aria-labelledby="nav-example-tab">
+
+                <div style="display: block;margin:2%;text-align: center;">
+
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+
+                            <div class="col-md-4">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="margin-top: 5%;color: blue;">Welcome</h4>
+                                    <p class="card-text">
+                                        This is Chemical Reaction Engineering Calculator. Presenting for the Project given by <b style="color: brown;">Professor Manjesh Kumar</b>.
+                                    </p>
+                                    <br>
+                                    <p class="card-text">
+                                        This can be used to calculate :
+                                        <ul style="text-align: left;color: rgb(182, 41, 185);">
+                                            <li>CSTR Volume</li>
+                                            <li>Rate of Reaction</li>
+                                            <li>Space Time</li>
+                                            <li>Selectivity (Instantaneous and Overall)</li>
+                                            <li>Conversion</li>
+                                        </ul>
+                                    </p>
+                                    
+                                    <br>
+                                    <p><b>Subimission by : </b>
+                                        <br/>Shresth Saxena (2019BB10054)
+                                        <br/>Ashu (2019BB10012)
+                                        <br/>Jayesh Chaudhari (2019BB10017)
+                                        <br/>Radhika Bagmare (2019BB10045)
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <img src="./bg.png" class="card-img" alt="Distillation plots">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!--CSTR Volume-->
+
+            <div class="tab-pane fade" id="nav-equilibriumdata" role="tabpanel"
+                aria-labelledby="nav-equilibriumdata-tab">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- <p style="text-align: center;">
+                            Assuming equation as A -> B:
+                        </p> -->
+                        
+                        <table>
+                            <tr>
+                                <td>
+                                    Initial Flowrate</strong><br>
+                                    <input required placeholder="e.g. 100 mole/min" type="number" name="Fnot" id="Fnot"><br><br>
+                                    
+                                    
+                                </td>
+                                <td>
+                                    Final Flowrate</strong><br>
+                                    <input required placeholder="e.g. 80 mole/min" type="number" name="F"
+                                        id="F"><br><br>
+                                </td>
+                                <td>
+                                    Rate of Reaction</strong><br>
+                                    <input required placeholder="e.g. 3" type="number" name="ra"
+                                        id="ra"><br><br>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="display: block;margin:2%;text-align: center;">
+                            <button type="button" class="btn btn-primary"id="volumesolver">
+                                Solve
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="volumeAnswer"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="resultVolume" style="display: inline-block;margin:2%;text-align:left;"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--Rate of Reaction-->
+
+            <div class="tab-pane fade" id="nav-mccabethiele" role="tabpanel" aria-labelledby="nav-mccabethiele-tab">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <p style="text-align:center;">Assuming equation as A -> B:</p>
+                        <table>
+                            <tr>
+                                <td>
+                                    Order of Reaction, n</strong><br>
+                                    <input required placeholder="e.g. 3" type="number" name="order"
+                                        id="order"><br><br>
+                                </td>
+                                <td>
+                                    Rate Constant, k</strong><br>
+                                    <input required placeholder="e.g. 2.29" type="number" name="k"
+                                        id="k"><br><br>
+                                </td>
+                                <td>
+                                    Concentration of A, Ca</strong><br>
+                                    <input required placeholder="e.g. 0.005" type="number" name="Ca"
+                                        id="Ca"><br><br>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="display: block;margin:2%;text-align: center;">
+                            <button type="button" class="btn btn-primary" id="rateSolver">
+                                Solve
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="resultra" style="display: inline-block;margin:2%;"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!--Space Time-->
+
+            <div class="tab-pane fade" id="nav-ponchonsavarit" role="tabpanel" aria-labelledby="nav-ponchonsavarit-tab">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <p style="text-align:center;">Enter the data for the space time calculation:</p>
+                        <table>
+                            <tr>
+                                <td>
+                                    Volume, V</strong><br>
+                                    <input required placeholder="e.g. 3" type="number" name="volume"
+                                        id="volume"><br><br>
+                                    
+                                </td>
+                                <td>
+                                    Volumetric Flowrate, v0</strong><br>
+                                    <input required placeholder="e.g. 1.2" type="number" id="vnot"><br><br>
+                                </td>
+                                
+                            </tr>
+                        </table>
+                        <div style="display: block;margin:2%;text-align: center;">
+                            <button type="button" class="btn btn-primary" id="timeSolver">
+                                Solve
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="resulttime" style="display: inline-block;margin:2%;"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="resultspacetime" style="display: inline-block;margin:2%;text-align:left;"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--Selectivity-->
+
+            <div class="tab-pane fade" id="nav-columnprofiles" role="tabpanel" aria-labelledby="nav-columnprofiles-tab">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <b><p style="text-align:center;">Enter the data for Overall Selectivity </p></b>
+                        <table>
+                            <tr>
+                                <td>
+                                    Desired Flowrate, Fd</strong><br>
+                                    <input required placeholder="e.g. 3" type="number" name="Fd"
+                                        id="Fd"><br><br>
+                                    
+                                </td>
+                                <td>
+                                    Undesired Flowrate, Fu</strong><br>
+                                    <input required placeholder="e.g. 1.2" type="number" id="Fu"><br><br>
+                                </td>
+                                
+                            </tr>
+                        </table>
+                        <div style="display: block;margin:2%;text-align: center;">
+                            <button type="button" class="btn btn-primary" id="overallSolver">
+                                Solve
+                            </button>
+                        </div>
+                        <b><p style="text-align:center;">Enter the data for Instantaneous Selectivity </p></b>
+                        <table>
+                            <tr>
+                                <td>
+                                    Rate of formation of Desired Product, rd</strong><br>
+                                    <input required placeholder="e.g. 3" type="number" name="rd"
+                                        id="rd"><br><br>
+                                    
+                                
+                                    Rate of formation of Undesired Products, ru</strong><br>
+                                    <input required placeholder="e.g. 1.2" type="number" id="ru"><br><br>
+                                </td>
+                                
+                            </tr>
+                        </table>
+                        <div style="display: block;margin:2%;text-align: center;">
+                            <button type="button" class="btn btn-primary" id="instSolver">
+                                Solve
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="resultSelectivity" style="display: inline-block;margin:2%;"></div>
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <!--Conversion-->
+
+            <div class="tab-pane fade col-md-6" id="nav-precision" role="tabpanel" aria-labelledby="nav-precision-tab">
+
+                <p style="text-align:center;">
+                    
+                </p>
+                <table>
+                    <tr>
+                        <td>
+                            Initial Concentration/Flowrate<br>
+                            <input required type="number" name="cainitial" id="cainitial"><br><br>
+                            Final Concentration/Flowrate<br>
+                            <input required type="number" name="cafinal" id="cafinal"><br><br>
+                        </td>
+                    </tr>
+                </table><br>
+                <div style="display: block;margin:2%;text-align: center;">
+                    <button type="button" class="btn btn-primary" id="conversionSolver">
+                        Solve
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <div id="resultConversion" style="display: inline-block;margin:2%;"></div>
+                </div>
+                
+            </div>
+            
+
+        </div>
+
+        <hr>
+        <footer style="margin-bottom:10%"></footer>
+
+    </div>
+
+</body>
+<script>
+    //volume calculation
+    document.getElementById("volumesolver").addEventListener("click", function() {
+      var Fnot = document.getElementById("Fnot").value;
+      var F = document.getElementById("F").value;
+      var ra = document.getElementById("ra").value;
+      var div = document.getElementById("volumeAnswer");
+      div.style.fontSize="20px";
+      var text="";
+      if(ra==0){
+         text = "ra value not correct, try again!!"
+         div.style.color = "red";
+      }else{
+        var ans=(Fnot-F)/ra;
+        text = "Volume of CSTR will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
+        div.style.color = "green";
+      }
+      div.innerHTML=text;
+    });
+    //rate of reaction calculation
+    document.getElementById("rateSolver").addEventListener("click", function() {
+      var order = document.getElementById("order").value;
+      var k = document.getElementById("k").value;
+      var Ca = document.getElementById("Ca").value;
+      var div = document.getElementById("resultra");
+      div.style.fontSize="20px";
+      var text="";
+      var ans=k*Math.pow(Ca,order);
+      text = "Rate of Reaction will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
+      div.style.color = "green";
+      
+      div.innerHTML=text;
+    });
+    //space time calculation
+    document.getElementById("timeSolver").addEventListener("click", function() {
+      var volume = document.getElementById("volume").value;
+      var vnot = document.getElementById("vnot").value;
+      var div = document.getElementById("resulttime");
+      div.style.fontSize="20px";
+      var text="";
+      if(vnot==0){
+         text = "Volumetric flowrate value not correct, try again!!"
+         div.style.color = "red";
+      }else{
+        var ans=(volume/vnot);
+      text = "Space time will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
+      div.style.color = "green";
+      }
+      
+      div.innerHTML=text;
+    });
+    //overall selectivity
+    document.getElementById("overallSolver").addEventListener("click", function() {
+      var fd = document.getElementById("Fd").value;
+      var fu = document.getElementById("Fu").value;
+      var div = document.getElementById("resultSelectivity");
+      div.style.fontSize="20px";
+      var text="";
+      if(fu==0){
+         text = "flowrate value not correct, try again!!"
+         div.style.color = "red";
+      }else{
+        var ans=(fd/fu);
+      text = "Overall Selectivity will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
+      div.style.color = "green";
+      }
+      
+      div.innerHTML=text;
+    });
+    //instantaneous selectivity
+    document.getElementById("instSolver").addEventListener("click", function() {
+      var fd = document.getElementById("rd").value;
+      var fu = document.getElementById("ru").value;
+      var div = document.getElementById("resultSelectivity");
+      div.style.fontSize="20px";
+      var text="";
+      if(fu==0){
+         text = "rate of formation value not correct, try again!!"
+         div.style.color = "red";
+      }else{
+        var ans=(fd/fu);
+      text = "Instantaneous Selectivity will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
+      div.style.color = "green";
+      }
+      
+      div.innerHTML=text;
+    });
+    //conversion
+    document.getElementById("conversionSolver").addEventListener("click", function() {
+      var canot = parseFloat(document.getElementById("cainitial").value);
+      var ca = parseFloat(document.getElementById("cafinal").value);
+      var div = document.getElementById("resultConversion");
+      div.style.fontSize="20px";
+      var text="";
+      console.log(ca+" "+canot);
+      if(ca>canot){
+         text = "Ca can not be more than Cao, try again!!"
+         div.style.color = "red";
+      }else{
+        var ans=((canot-ca)/canot)*100;
+      text = "<b>"+parseFloat(ans.toFixed(3))+"</b>% conversion will be there";
+      div.style.color = "green";
+      }
+      
+      div.innerHTML=text;
+    });
+</script>
+
+</html>
