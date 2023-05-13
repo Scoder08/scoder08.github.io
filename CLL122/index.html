@@ -140,18 +140,18 @@
                             <tr>
                                 <td>
                                     Initial Flowrate</strong><br>
-                                    <input required placeholder="[ml/min]" type="number" name="Fnot" id="Fnot"><br><br>
+                                    <input required placeholder="(mol/min)" type="number" name="Fnot" id="Fnot"><br><br>
                                     
                                     
                                 </td>
                                 <td>
                                     Final Flowrate</strong><br>
-                                    <input required placeholder="[ml/min]" type="number" name="F"
+                                    <input required placeholder="(mol/min)" type="number" name="F"
                                         id="F"><br><br>
                                 </td>
                                 <td>
                                     Rate of Reaction</strong><br>
-                                    <input required placeholder="e.g. 3" type="number" name="ra"
+                                    <input required placeholder="(mol/min.L)" type="number" name="ra"
                                         id="ra"><br><br>
                                 </td>
                             </tr>
@@ -194,7 +194,7 @@
                                 </td>
                                 <td>
                                     Concentration of A, Ca</strong><br>
-                                    <input required placeholder="e.g. 0.005" type="number" name="Ca"
+                                    <input required placeholder="(mol/L)" type="number" name="Ca"
                                         id="Ca"><br><br>
                                     Order with respect to A, n</strong><br>
                                     <input required placeholder="e.g. 3" type="number" name="order"
@@ -203,7 +203,7 @@
                                 
                                 <td>
                                     Concentration of B, Cb</strong><br>
-                                    <input required placeholder="e.g. 0.005" type="number" name="Cb"
+                                    <input required placeholder="(mol/L)" type="number" name="Cb"
                                         id="Cb"><br><br>
                                 
                                     Order with respect to B, m</strong><br>
@@ -237,13 +237,13 @@
                             <tr>
                                 <td>
                                     Volume, V</strong><br>
-                                    <input required placeholder="e.g. 3" type="number" name="volume"
+                                    <input required placeholder="(Liter)" type="number" name="volume"
                                         id="volume"><br><br>
                                     
                                 </td>
                                 <td>
                                     Volumetric Flowrate, v0</strong><br>
-                                    <input required placeholder="e.g. 1.2" type="number" id="vnot"><br><br>
+                                    <input required placeholder="(L/sec)" type="number" id="vnot"><br><br>
                                 </td>
                                 
                             </tr>
@@ -278,13 +278,13 @@
                             <tr>
                                 <td>
                                     Desired Flowrate, Fd</strong><br>
-                                    <input required placeholder="e.g. 3" type="number" name="Fd"
+                                    <input required placeholder="(mol/min)" type="number" name="Fd"
                                         id="Fd"><br><br>
                                     
                                 </td>
                                 <td>
                                     Undesired Flowrate, Fu</strong><br>
-                                    <input required placeholder="e.g. 1.2" type="number" id="Fu"><br><br>
+                                    <input required placeholder="(mol/min)" type="number" id="Fu"><br><br>
                                 </td>
                                 
                             </tr>
@@ -299,12 +299,12 @@
                             <tr>
                                 <td>
                                     Rate of formation of Desired Product, rd</strong><br>
-                                    <input required placeholder="e.g. 3" type="number" name="rd"
+                                    <input required placeholder="(mol/min.L)" type="number" name="rd"
                                         id="rd"><br><br>
                                     
                                 
                                     Rate of formation of Undesired Products, ru</strong><br>
-                                    <input required placeholder="e.g. 1.2" type="number" id="ru"><br><br>
+                                    <input required placeholder="(mol/min.L)" type="number" id="ru"><br><br>
                                 </td>
                                 
                             </tr>
@@ -327,16 +327,14 @@
 
             <div class="tab-pane fade col-md-6" id="nav-precision" role="tabpanel" aria-labelledby="nav-precision-tab">
 
-                <p style="text-align:center;">
-                    
-                </p>
+                <p style="text-align:center;">Enter data to calculate conversion:</p>
                 <table>
                     <tr>
                         <td>
                             Initial Concentration/Flowrate<br>
-                            <input required type="number" name="cainitial" id="cainitial"><br><br>
+                            <input required placeholder="(mol/min)" type="number" name="cainitial" id="cainitial"><br><br>
                             Final Concentration/Flowrate<br>
-                            <input required type="number" name="cafinal" id="cafinal"><br><br>
+                            <input required placeholder="(mol/min)" type="number" name="cafinal" id="cafinal"><br><br>
                         </td>
                     </tr>
                 </table><br>
@@ -380,7 +378,7 @@
         div.style.color = "red";
       }else{
         var ans=(Fnot-F)/ra;
-        text = "Volume of CSTR will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
+        text = "Volume of CSTR will be <b>"+parseFloat(ans.toFixed(3))+"</b> Liter.";
         div.style.color = "green";
       }
       div.innerHTML=text;
@@ -395,26 +393,33 @@
       var div = document.getElementById("resultra");
       div.style.fontSize="20px";
       var text="";
-      var ans=k*Math.pow(Ca,order)*Math.pow(Cb,orderb);
+      if(Ca<0 || Cb<0){
+        text = "Concentration value not correct, try again!!"
+        div.style.color = "red";
+      }else{
+        var ans=k*Math.pow(Ca,order)*Math.pow(Cb,orderb);
       text = "Rate of Reaction will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
       div.style.color = "green";
-      
+      }
       div.innerHTML=text;
     });
     //space time calculation
     document.getElementById("timeSolver").addEventListener("click", function() {
-      var volume = document.getElementById("volume").value;
-      var vnot = document.getElementById("vnot").value;
+      var volume = parseFloat(document.getElementById("volume").value);
+      var vnot = parseFloat(document.getElementById("vnot").valu);
       var div = document.getElementById("resulttime");
       div.style.fontSize="20px";
       var text="";
-      if(vnot==0){
+      if(V<0 || vnot<0){
+        text = "Any value given cannot be negative, try again!!"
+        div.style.color = "red";
+      }else if(vnot==0){
          text = "Volumetric flowrate value not correct, try again!!"
          div.style.color = "red";
       }else{
         var ans=(volume/vnot);
-      text = "Space time will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
-      div.style.color = "green";
+        text = "Space time will be <b>"+parseFloat(ans.toFixed(3))+"</b> seconds.";
+        div.style.color = "green";
       }
       
       div.innerHTML=text;
@@ -431,8 +436,8 @@
          div.style.color = "red";
       }else{
         var ans=(fd/fu);
-      text = "Overall Selectivity will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
-      div.style.color = "green";
+        text = "Overall Selectivity will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
+        div.style.color = "green";
       }
       
       div.innerHTML=text;
