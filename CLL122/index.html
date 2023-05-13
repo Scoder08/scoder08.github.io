@@ -181,14 +181,12 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <p style="text-align:center;">Assuming equation as A -> B:</p>
+                        <p style="text-align:center;">Assuming equation as aA + bB -> cC + dD:</p>
+                        <br>
+                        <p style="text-align:center;"><em>-ra = k*C<sub>A</sub><sup>n</sup>*C<sub>B</sub><sup>m</sup></em></p>
                         <table>
                             <tr>
-                                <td>
-                                    Order of Reaction, n</strong><br>
-                                    <input required placeholder="e.g. 3" type="number" name="order"
-                                        id="order"><br><br>
-                                </td>
+                               
                                 <td>
                                     Rate Constant, k</strong><br>
                                     <input required placeholder="e.g. 2.29" type="number" name="k"
@@ -198,6 +196,19 @@
                                     Concentration of A, Ca</strong><br>
                                     <input required placeholder="e.g. 0.005" type="number" name="Ca"
                                         id="Ca"><br><br>
+                                    Order with respect to A, n</strong><br>
+                                    <input required placeholder="e.g. 3" type="number" name="order"
+                                        id="order"><br><br>
+                                </td>
+                                
+                                <td>
+                                    Concentration of B, Cb</strong><br>
+                                    <input required placeholder="e.g. 0.005" type="number" name="Cb"
+                                        id="Cb"><br><br>
+                                
+                                    Order with respect to B, m</strong><br>
+                                    <input required placeholder="e.g. 3" type="number" name="orderb"
+                                        id="orderb"><br><br>
                                 </td>
                             </tr>
                         </table>
@@ -373,10 +384,12 @@
       var order = document.getElementById("order").value;
       var k = document.getElementById("k").value;
       var Ca = document.getElementById("Ca").value;
+      var Cb = document.getElementById("Cb").value;
+      var orderb = document.getElementById("orderb").value;
       var div = document.getElementById("resultra");
       div.style.fontSize="20px";
       var text="";
-      var ans=k*Math.pow(Ca,order);
+      var ans=k*Math.pow(Ca,order)*Math.pow(Cb,orderb);
       text = "Rate of Reaction will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
       div.style.color = "green";
       
