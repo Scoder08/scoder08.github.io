@@ -140,13 +140,13 @@
                             <tr>
                                 <td>
                                     Initial Flowrate</strong><br>
-                                    <input required placeholder="e.g. 100 mole/min" type="number" name="Fnot" id="Fnot"><br><br>
+                                    <input required placeholder="[ml/min]" type="number" name="Fnot" id="Fnot"><br><br>
                                     
                                     
                                 </td>
                                 <td>
                                     Final Flowrate</strong><br>
-                                    <input required placeholder="e.g. 80 mole/min" type="number" name="F"
+                                    <input required placeholder="[ml/min]" type="number" name="F"
                                         id="F"><br><br>
                                 </td>
                                 <td>
@@ -363,15 +363,21 @@
 <script>
     //volume calculation
     document.getElementById("volumesolver").addEventListener("click", function() {
-      var Fnot = document.getElementById("Fnot").value;
-      var F = document.getElementById("F").value;
+      var Fnot = parseFloat(document.getElementById("Fnot").value);
+      var F = parseFloat(document.getElementById("F").value);
       var ra = document.getElementById("ra").value;
       var div = document.getElementById("volumeAnswer");
       div.style.fontSize="20px";
       var text="";
-      if(ra==0){
+      if(F<0 || Fnot<0){
+        text = "F and F<sub>o</sub> value cannot be negative, try again!!"
+         div.style.color = "red";
+      }else if(ra==0){
          text = "ra value not correct, try again!!"
          div.style.color = "red";
+      }else if(F>Fnot){
+        text = "F can not be greater than F<sub>o</sub>, try again!!"
+        div.style.color = "red";
       }else{
         var ans=(Fnot-F)/ra;
         text = "Volume of CSTR will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
