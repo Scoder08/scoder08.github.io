@@ -398,7 +398,7 @@
         div.style.color = "red";
       }else{
         var ans=k*Math.pow(Ca,order)*Math.pow(Cb,orderb);
-      text = "Rate of Reaction will be <b>"+parseFloat(ans.toFixed(3))+"</b>";
+      text = "Rate of Reaction will be <b>"+parseFloat(ans.toFixed(3))+"</b> mol/min.L";
       div.style.color = "green";
       }
       div.innerHTML=text;
@@ -406,7 +406,7 @@
     //space time calculation
     document.getElementById("timeSolver").addEventListener("click", function() {
       var volume = parseFloat(document.getElementById("volume").value);
-      var vnot = parseFloat(document.getElementById("vnot").valu);
+      var vnot = parseFloat(document.getElementById("vnot").value);
       var div = document.getElementById("resulttime");
       div.style.fontSize="20px";
       var text="";
